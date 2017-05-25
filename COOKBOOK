@@ -1,0 +1,4 @@
+## Create mysql user with root privileges
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'fred1';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Compare
+{% endblock %}
+{% block cssfile %}
+    <link href = "{% static 'assets/css/compare.css'%}" rel="stylesheet"></link>
+{% endblock %}    
+{% block content %}
+<!-- section 1-->
+<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+                <table class = "table table-bordered">
+                    <tr>
+                        <th>{{p1.0}}</th><th>{{p2.0}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{p1.1}}</th><th>{{p2.1}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{p1.2}}</th><th>{{p2.2}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{p1.3}}</th><th>{{p2.3}}</th>
+                    </tr>
+                    <tr>    
+                        <th>{{p1.4}}</th><th>{{p2.4}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{p1.5}}</th><th>{{p2.5}}</th>
+                    </tr>
+                    <tr> 
+                        <th>{{p1.6}}</th><th>{{p2.6}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{p1.7}}</th><th>{{p2.7}}</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    
+        
+        <div class="row">
+            <form id = "submitform" action ="." method="post">
+            {% csrf_token %}
+            <input type="hidden" name="p1_id" id="p1_id" value={{p1.0}}></input>
+            <input type="hidden" name="p2_id" id="p2_id" value={{p2.0}}></input>
+            <input type="hidden" name="index" id="index" value={{index}}></input>
+            <input type="hidden" name="iflag" id="iflag"></input>
+            <div class="col-xs-12">
+                <div class="input-group centered">
+                  <span class="input-group-btn">
+                    <button id = "index-button" class="btn btn-default" type="button">start:{{index}}</button>
+                  </span>
+                  <span class="input-group-btn">
+                    <input type="text" class="form-control" id = "index-id" placeholder="">
+                  </span>
+                </div><!-- /input-group -->
+            </div>
+            <div class="col-xs-12">
+                <div class="input-group centered">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" id = "identical" type="button">Same</button>
+                  </span>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" id = "different" type="button">Different</button>
+                  </span>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="reset">Reset</button>
+                  </span>
+                </div><!-- /input-group -->
+            </div>
+            </form>
+        </div>
+    
+</div>
+<!-- section 1 ends-->       
+<!-- section 2-->
+
+{%endblock%}
+{% block script %}
+        
+        <script>
+            $('#identical').click(function(){
+                $('#iflag').val(1);
+                $('#submitform').submit();
+            })
+            $('#different').click(function(){
+                $('#iflag').val(0);
+                $('#submitform').submit();
+            })
+            $('#index-button').click(function(){
+                var i = $('#index-id').val();
+                $('#index').val(i);
+            })
+        </script>
+{%endblock%}

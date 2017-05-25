@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}My Store{% endblock %}</title>
+    <!--link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+     <!-- Bootstrap core CSS -->
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+	{% block cssfile %}
+	{% endblock %}
+    <script src="{% static 'assets/js/jquery.2.1.4.js' %}"></script>
+    {% block style %}{% endblock %}
+  </head>
+  <body>
+       <!--[mypart]-->
+      <div class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">SP<i class="fa fa-circle"></i>T</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li id='home' ><a href="/store/">HOME</a></li>
+            {% if user.is_authenticated %}
+            <li id='profile'><a href="/store/profile">PROFILE</a></li>
+            <li id='sign'><a href="/accounts/logout">SIGN OUT</a></li>
+            {% else %}
+            <li id ='sign'><a href="/accounts/login">SIGN IN</a></li>
+            <li id ='sign'><a href="/accounts/register">REGISTER</a></li>
+            {% endif %}
+            {% block carticon %}
+            {% endblock %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <!--[mypart]-->
+    {% block content %}{% endblock %}
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    {% block script %}{% endblock %}
+  </body>
+</html>
